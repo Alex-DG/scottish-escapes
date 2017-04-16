@@ -15,8 +15,8 @@ import HomePage from '../../ui/pages/HomePage.js';
 // Components
 
 Meteor.startup(() => {
-  // 
-  // WebApp.rawConnectHandlers.use(function(req, res, next) {
+
+  // WebApp.connectHandlers.use(function(req, res, next) {
   //   res.setHeader("Access-Control-Allow-Origin", "*");
   //   res.setHeader("Access-Control-Allow-Headers", "*");
   //   return next();
