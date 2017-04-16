@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { WebApp } from 'meteor/webapp';
 import { render } from 'react-dom';
 import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 
@@ -14,6 +15,12 @@ import HomePage from '../../ui/pages/HomePage.js';
 // Components
 
 Meteor.startup(() => {
+  // 
+  // WebApp.rawConnectHandlers.use(function(req, res, next) {
+  //   res.setHeader("Access-Control-Allow-Origin", "*");
+  //   res.setHeader("Access-Control-Allow-Headers", "*");
+  //   return next();
+  // });
 
   render(
     <Router history={ browserHistory }>
