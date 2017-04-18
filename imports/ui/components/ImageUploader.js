@@ -5,7 +5,7 @@ import { Slingshot } from 'meteor/edgee:slingshot';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert'
 
-class Uploader extends React.Component {
+class ImageUploader extends React.Component {
 
   constructor() {
     super();
@@ -17,11 +17,10 @@ class Uploader extends React.Component {
     this.setState({ progress: 0 });
 
     const Uploader = new Slingshot.Upload('Uploads');
-
+    console.log(files);
+    console.log(Uploader);
     if (files) {
       Uploader.send(files[0], (error, url) => {
-        //this.setState({ progress: Uploader.progress() * 100 });
-
         if (error) {
           Bert.alert(error.reason, 'danger');
         } else {
@@ -32,19 +31,18 @@ class Uploader extends React.Component {
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
+  handleSubmit() {
     let name = this.state.name;
     let url = this.state.url;
+
     console.log(url);
 
     Meteor.call('images.insert', name, url, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
+        console.log('ERROR - submit');
       } else {
         Bert.alert('Document successfully uploaded', 'success');
-        this.props.closeModal();
       }
     });
   }
@@ -55,10 +53,14 @@ class Uploader extends React.Component {
         <Dropzone onDrop={ this.handleDrop.bind(this) }>
           <div>Try dropping some files here, or click to select files to upload.</div>
         </Dropzone>
-        <input type="submit" className="btn btn-success" value="Upload" />
+        <button type="submit" className="btn btn-default" onClick={ () => this.handleSubmit() }>
+          <i className="glyphicon glyphicon-refresh" /><span style={ {paddingLeft: '10px'} }>Submit</span>
+        </button>
       </div>
     );
   }
 }
 
-export default Uploader;
+//<input type="submit" className="btn btn-success" value="Upload" />
+
+export default ImageUploader;

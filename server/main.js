@@ -1,11 +1,11 @@
 import '../imports/startup/both';
 import '../imports/startup/server';
 
-WebApp.rawConnectHandlers.use(function(req, res, next) {
-  console.log('TEST');
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  return next();
-});
+// WebApp.rawConnectHandlers.use(function(req, res, next) {
+//   console.log('TEST');
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   return next();
+// });
 
 //
 // WebApp.connectHandlers.use(function(req, res, next) {

@@ -14,7 +14,8 @@ Meteor.methods({
 
     return Images.insert({
       name,
-      url
+      url,
+      created_at: new Date()
     });
   }
 });

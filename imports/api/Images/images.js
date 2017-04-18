@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-//import { SimpleSchema } from 'meteor/aldeed:collection2-core';
-import SimpleSchema from 'simpl-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const Images = new Mongo.Collection('images');
 
@@ -26,6 +25,15 @@ Images.schema = new SimpleSchema({
   url: {
     type: String,
     label: 'Url'
+  },
+  resident_id: {
+    type: String,
+    label: 'id',
+    optional: true
+  },
+  created_at: {
+    type: Date,
+    label: 'Created At'
   }
 });
 

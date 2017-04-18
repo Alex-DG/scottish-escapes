@@ -1,18 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import Uploader from '../components/Uploader';
-import ImageGrid from '../components/ImageGrid';
+import ImageUploader from '../components/ImageUploader';
 
 class HomePage extends React.Component {
+
+  constructor() {
+    super();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.images);
+  }
 
   render() {
     return (
       <div>
-        <Uploader />
-        <ImageGrid />
+        <ImageUploader />
       </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  images: PropTypes.array
+};
 
 export default HomePage;
