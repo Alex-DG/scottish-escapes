@@ -10,7 +10,6 @@ export default createContainer( (props) => {
 
   // Data
   const images = Images.find().fetch();
-  console.log(images);
 
   return { images };
 }, HomePage);

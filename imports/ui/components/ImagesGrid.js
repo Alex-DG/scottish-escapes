@@ -14,7 +14,7 @@ class ImagesGrid extends React.Component {
   }
 
   handleClickThumbnail() {
-    console.log('handleClickThumbnail');
+    //TODO
   }
 
   render() {

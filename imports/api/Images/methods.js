@@ -11,7 +11,7 @@ Meteor.methods({
    * @param { String } thumbnailWidth - Image's thumbnail width
    * @param { String } thumbnailHeight - Image's thumbnail height
    * @param { String } caption - Image's caption
-   **/
+   */
   'images.insert'(name, src, thumbnail, thumbnailWidth, thumbnailHeight, caption) {
     check(name, String);
     check(src, String);
