@@ -18,23 +18,42 @@ Images.deny({
 });
 
 Images.schema = new SimpleSchema({
+
   name: {
     type: String,
     label: 'Name'
   },
-  url: {
+
+  src: {
     type: String,
     label: 'Url'
   },
-  resident_id: {
+
+  thumbnail: {
     type: String,
-    label: 'id',
-    optional: true
+    label: 'Thumbnail'
   },
+
+  thumbnailWidth: {
+    type: Number,
+    label: 'Thumbnail Width'
+  },
+
+  thumbnailHeight: {
+    type: Number,
+    label: 'Thumbnail Height'
+  },
+
+  caption: {
+    type: String,
+    label: 'Name'
+  },
+
   created_at: {
     type: Date,
     label: 'Created At'
   }
+
 });
 
 Images.attachSchema(Images.schema);

@@ -3,18 +3,30 @@ import { check } from 'meteor/check';
 import Images from './images';
 
 Meteor.methods({
+
   /**
-   * Create new Images
    * @param { String } name - Image's name
-   * @param { String } url - Image's url
-   */
-  'images.insert'(name, url) {
+   * @param { String } src - Image's url
+   * @param { String } thumbnail - Image's thumbnail url
+   * @param { String } thumbnailWidth - Image's thumbnail width
+   * @param { String } thumbnailHeight - Image's thumbnail height
+   * @param { String } caption - Image's caption
+   **/
+  'images.insert'(name, src, thumbnail, thumbnailWidth, thumbnailHeight, caption) {
     check(name, String);
-    check(url, String);
+    check(src, String);
+    check(thumbnail, String);
+    check(thumbnailWidth, Number);
+    check(thumbnailHeight, Number);
+    check(caption, String);
 
     return Images.insert({
       name,
-      url,
+      src,
+      thumbnail,
+      thumbnailWidth,
+      thumbnailHeight,
+      caption,
       created_at: new Date()
     });
   }

@@ -16,6 +16,6 @@ Slingshot.createDirective("Uploads", Slingshot.S3Storage, {
   },
   key: function ( file ) {
     let fileName = Date.now();
-    return `alex/${fileName}`;
+    return `images/${fileName}`;
   }
 });

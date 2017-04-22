@@ -5,9 +5,12 @@ import Images from '../../api/images/images';
 
 export default createContainer( (props) => {
 
+  // Subscribtion
   Meteor.subscribe('images.all');
 
+  // Data
   const images = Images.find().fetch();
   console.log(images);
+
   return { images };
 }, HomePage);
