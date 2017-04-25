@@ -1,3 +1,3 @@
 // Images
-import '../../api/Images/methods';
-import '../../api/Images/server/publications';
+import '../../api/images/methods';
+import '../../api/images/server/publications';
