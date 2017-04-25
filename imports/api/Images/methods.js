@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 import Images from './images';
 
 Meteor.methods({
-  // TEST
+
   /**
    * @param { String } name - Image's name
    * @param { String } src - Image's url
