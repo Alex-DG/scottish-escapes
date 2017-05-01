@@ -1,7 +1,7 @@
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import HomePage from '../pages/HomePage'
-import Images from '../../api/images/images';
+import Images from '../../api/Images/images';
 
 export default createContainer( (props) => {
 
