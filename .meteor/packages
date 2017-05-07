@@ -44,3 +44,4 @@ email
 alanning:roles
 jss:bootstrap-modal-prompt
 http
+peerlibrary:aws-sdk

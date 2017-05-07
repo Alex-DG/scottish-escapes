@@ -17,8 +17,8 @@ class UploadForm extends React.Component {
     const name = this.state.name;
     const src = this.state.src;
     const thumbnail = this.state.src;
-    const thumbnailWidth = 200;
-    const thumbnailHeight = 200;
+    const thumbnailWidth = 500;
+    const thumbnailHeight = 500;
     const caption = this.state.caption;
 
     Meteor.call('images.insert', name, src, thumbnail, thumbnailWidth, thumbnailHeight, caption, (error) => {

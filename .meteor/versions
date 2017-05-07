@@ -86,6 +86,8 @@ npm-mongo@2.2.16_1
 observe-sequence@1.0.14
 ordered-dict@1.0.9
 patrickml:react-modal@3.0.0
+peerlibrary:aws-sdk@2.4.9_1
+peerlibrary:blocking@0.5.2
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
 practicalmeteor:mocha@2.4.5_6
