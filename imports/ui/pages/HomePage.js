@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ImageUploader from '../components/ImageUploader';
-import ImagesGrid from '../components/ImagesGrid';
+import Gallery from '../components/Gallery';
 
 class HomePage extends React.Component {
 
@@ -24,7 +24,9 @@ class HomePage extends React.Component {
     return (
       <div>
         <ImageUploader />
-        <ImagesGrid data={ this.state.images }/>
+        <div className="flex-container">
+          <Gallery className="flex-container" data={ this.state.images }/>
+        </div>
       </div>
     );
   }

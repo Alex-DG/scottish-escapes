@@ -1,9 +1,10 @@
 import React from 'react';
-import Gallery from 'react-grid-gallery';
 
-import ImageItem from './ImageItem';
+import { getThumbnail } from '../../modules/thumbnail'
 
-class ImagesGrid extends React.Component {
+import Thumbnail from './Thumbnail';
+
+class Gallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = { images: [] };
@@ -21,24 +22,24 @@ class ImagesGrid extends React.Component {
   renderGrid() {
     if (this.state.images) {
 
-      let images = this.state.images.map( (image, index) => {
-        return <ImageItem key={ index } url={ image.thumbnail } />
+      let thumbnails = this.state.images.map( (image, index) => {
+        return <Thumbnail key={ index } url={ image.thumbnail } />;
       });
 
       let row = [];
       let grid = [];
 
-      images.map( (item, index) => {
+      thumbnails.map( (item, index) => {
         console.log(item);
         index++;
-        row.push(<div key={ index } className="col-xs-12 col-sm-3">{ item } </div>);
+        row.push(<td style={ {padding: '20px'} } >{ item }</td>);
 
-        if (index % 4 === 0) {
-          grid.push(<div key={ index } className="row">{ row }</div>);
+        if (index % 3 === 0) {
+          grid.push(<tr key={ index }>{ row }</tr>);
           row = [];
           index = 1;
-        } else if (index === images.length) {
-          grid.push(<div key={ index } className="row">{ row }</div>);
+        } else if (index === thumbnails.length) {
+          grid.push(<div key={ index } className="row align-items-center">{ row }</div>);
         }
       });
 
@@ -58,4 +59,4 @@ class ImagesGrid extends React.Component {
   }
 }
 
-export default ImagesGrid;
+export default Gallery;
