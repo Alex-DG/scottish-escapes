@@ -20,7 +20,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    //console.log(this.state.images);
+    console.log(this.state.images);
     return (
       <div>
         <ImageUploader />
