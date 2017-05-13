@@ -1,22 +1,82 @@
-.gal-thumb {
-    background-color: grey;
-    width: 355px;
-    height: 335px;
-    display: inline-block; /* makes it fit in like an <img> */
-    background-size: cover; /* or contain */
-    background-position: center center;
-    background-repeat: no-repeat;
+
+.gallery-main {
+  max-width: 1100px;
+  width: 90%;
+  margin: 1em auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0.6em;
 }
 
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
+a {
+  transition: all .3s ease-in-out;
+}
+
+.gallery {
+  background: #ddd;
+  border-radius: 20px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
+.thumb {
+  margin: 5px;
+  max-width: 95%;
+  display: inline-block; /* for non-flex browsers */
+}
+
+.thumb a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: grayscale(0.7);
+  filter: grayscale(0.7);
+}
+.thumb-first a {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  //-webkit-filter: grayscale(0.7);
+  //filter: grayscale(0.7);
+}
+
+.thumb a:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
+.thumb img {
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 200px;
+  vertical-align: bottom;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.4);
+}
+.thumb-first img {
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 200px;
+  vertical-align: bottom;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+// THE FIRST THUMB
+.thumb-first .img-first {
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 300px;
+  vertical-align: bottom;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+// THUMB HOVER
+.thumb a:hover img {
+  transition: all .3s ease-in-out;
+  box-shadow: 0 0 6px 4px rgba(100, 250, 0, 0.4);
+  z-index: 20;
+}

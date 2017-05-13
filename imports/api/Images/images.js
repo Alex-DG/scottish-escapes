@@ -21,7 +21,8 @@ Images.schema = new SimpleSchema({
 
   name: {
     type: String,
-    label: 'Name'
+    label: 'Name',
+    optional: true
   },
 
   src: {
@@ -34,24 +35,15 @@ Images.schema = new SimpleSchema({
     label: 'Thumbnail'
   },
 
-  thumbnailWidth: {
-    type: Number,
-    label: 'Thumbnail Width'
-  },
-
-  thumbnailHeight: {
-    type: Number,
-    label: 'Thumbnail Height'
-  },
-
   caption: {
     type: String,
-    label: 'Name'
+    label: 'Name',
+    optional: true
   },
 
-  created_at: {
+  uploaded_at: {
     type: Date,
-    label: 'Created At'
+    label: 'Uploaded At'
   }
 
 });

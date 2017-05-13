@@ -17,11 +17,9 @@ class UploadForm extends React.Component {
     const name = this.state.name;
     const src = this.state.src;
     const thumbnail = this.state.src;
-    const thumbnailWidth = 500;
-    const thumbnailHeight = 500;
     const caption = this.state.caption;
 
-    Meteor.call('images.insert', name, src, thumbnail, thumbnailWidth, thumbnailHeight, caption, (error) => {
+    Meteor.call('images.insert', name, src, thumbnail, caption, (error) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
@@ -37,7 +35,7 @@ class UploadForm extends React.Component {
 
     if (files) {
 
-      const caption = this.refs.cap.value;
+      const caption = this.refs.caption.value;
 
       Uploader.send(files[0], (error, url) => {
 
@@ -75,7 +73,7 @@ class UploadForm extends React.Component {
             <div className="flex-column-container">
                 <div style={ {margin: "10px"} }>
                   <p>
-                    <input type="text" className="form-control" ref="cap" placeholder="Caption" defaultValue="" />
+                    <input type="text" className="form-control" ref="caption" placeholder="Caption" defaultValue="" />
                   </p>
                 </div>
                 <div className="flex-center-container">

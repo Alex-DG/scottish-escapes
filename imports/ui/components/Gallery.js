@@ -50,13 +50,43 @@ class Gallery extends React.Component {
     }
   }
 
+  renderThumb() {
+    if (this.state.images) {
+      return this.state.images.map( (img, index) => {
+        switch (index) {
+          case 0:
+            return (
+              <figure className="thumb-first" key={ index }>
+                <a href="#">
+                  <img className="img-first" src={ img.thumbnail } />
+                </a>
+              </figure>
+            );
+            break;
+          default:
+          return (
+            <figure className="thumb" key={ index }>
+              <a href="#">
+                <img src={ img.thumbnail } />
+              </a>
+            </figure>
+          );
+        }
+      });
+    }
+  }
+
+
   render() {
     return (
-      <div>
-        { this.renderGrid() }
+      <div className="gallery-main">
+        <div className="gallery">
+          { this.renderThumb() }
+        </div>
       </div>
      );
   }
 }
+
 
 export default Gallery;
