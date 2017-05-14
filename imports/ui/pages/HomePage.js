@@ -2,25 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ImageUploader from '../components/ImageUploader';
-import Gallery from '../components/Gallery';
+import Gallery from '../components/grid/Gallery';
 
 class HomePage extends React.Component {
 
   constructor() {
     super();
-
     this.state = { images: [] }
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log(nextProps);
     if (nextProps.images) {
       this.setState({ images: nextProps.images });
     }
   }
 
   render() {
-    console.log(this.state.images);
     return (
       <div>
         <ImageUploader />
