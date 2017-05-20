@@ -75,6 +75,11 @@ a {
 }
 
 // THUMB HOVER
+.thumb-first a:hover img {
+  transition: all .3s ease-in-out;
+  box-shadow: 0 0 6px 4px rgba(100, 250, 0, 0.4);
+  z-index: 20;
+}
 .thumb a:hover img {
   transition: all .3s ease-in-out;
   box-shadow: 0 0 6px 4px rgba(100, 250, 0, 0.4);

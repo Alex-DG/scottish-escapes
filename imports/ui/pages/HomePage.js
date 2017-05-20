@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import ImageUploader from '../components/ImageUploader';
 import Gallery from '../components/grid/Gallery';
 
-class HomePage extends React.Component {
+class HomePage extends Component {
 
   constructor() {
     super();
