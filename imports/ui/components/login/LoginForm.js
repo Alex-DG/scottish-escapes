@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
 
+import { Meteor } from 'meteor/meteor';
+
+import { Bert } from 'meteor/themeteorchef:bert';
+import { browserHistory } from 'react-router';
+
+
 class LoginForm extends Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
-    console.log('handleSubmit');
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const username = this.refs.user.value;
+    const password = this.refs.pass.value;
+
+    Meteor.loginWithPassword(username, password, (error) => {
+      if (error) {
+        Bert.alert(error.reason, 'danger');
+      } else {
+        Bert.alert('Welcome Sir Choux :D !', 'success');
+
+        browserHistory.push('/article');
+      }
+    });
   }
 
   render() {
@@ -20,6 +39,7 @@ class LoginForm extends Component {
                type="text"
                id="username"
                name="username"
+               ref="user"
                placeholder="Username"
                className="form-control required" />
           </div>
@@ -30,7 +50,8 @@ class LoginForm extends Component {
               type="password"
               id="password"
               name="password"
-              placeholder="PIN"
+              ref="pass"
+              placeholder="Password"
               className="form-control required " />
           </div>
 
