@@ -46,6 +46,11 @@ Articles.schema = new SimpleSchema({
     optional: true
   },
 
+  created_at: {
+    type: Date,
+    label: 'Created At'
+  },
+
   uploaded_at: {
     type: Date,
     label: 'Uploaded At'

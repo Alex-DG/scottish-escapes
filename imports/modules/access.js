@@ -8,7 +8,7 @@ export const isLogged = (nextState, replace) => {
     console.log(Meteor.userId());
     console.log(nextState.location.pathname);
     replace({
-      pathname: '/article',
+      pathname: '/articles',
       state: { nextPathname: nextState.location.pathname }
     });
   } else { console.log('NO LOG IN');}

@@ -24,7 +24,7 @@ class LoginForm extends Component {
       } else {
         Bert.alert('Welcome Sir Choux :D !', 'success');
 
-        browserHistory.push('/article');
+        browserHistory.push('/articles');
       }
     });
   }

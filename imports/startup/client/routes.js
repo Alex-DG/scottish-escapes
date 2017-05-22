@@ -12,10 +12,10 @@ import AppLayout from '../../ui/layouts/AppLayout.js';
 
 // Pages
 import LoginPage from '../../ui/pages/LoginPage.js';
-import ArticlePage from '../../ui/pages/ArticlePage';
 
 // Containers
 import ImagesContainer from '../../ui/container/ImagesContainer';
+import ArticlesContainer from '../../ui/container/ArticlesContainer';
 
 // Components
 
@@ -27,9 +27,9 @@ Meteor.startup(() => {
         <IndexRoute name="home" component={ ImagesContainer } />
       </Route>
 
-      <Route name="login" path='/login' title='Login' component={ AppLayout } onEnter={ isLogged } >
+      <Route name="login" path='/login' title='Login' component={ AppLayout } >
         <IndexRoute name="login" component={ LoginPage } />
-        <Route name="article" path='/article' component={ ArticlePage }/>
+        <Route name="article" path='/articles' component={ ArticlesContainer }/>
       </Route>
 
     </Router>,
