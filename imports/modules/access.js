@@ -12,7 +12,6 @@ export const isLogged = (nextState, replace) => {
 
 export const accessAdmin = (nextState, replace) => {
   const roles = ['admin'];
-  //addMiddleware(nextState, replace, '/not-found', false, roles);
   addMiddleware(nextState, replace, '/not-found', false, roles);
 };
 

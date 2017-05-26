@@ -31,14 +31,27 @@ class ArticlesPage extends Component {
   render() {
     return(
       <div>
-        <div>
-          <button type="button" className="btn btn-danger" onClick={ this.handleLogout }>
-            <span className="glyphicon glyphicon-log-out" style={ {paddingRight: '10px'} }></span>Logout
+        <div className="row">
+          <button type="button" className="btn btn-danger pull-right margin-top-10 margin-right-10" onClick={ this.handleLogout }>
+            <span className="glyphicon glyphicon-log-out"></span>Logout
           </button>
         </div>
 
         <div>
-          <Dashboard articles={ this.state.articles } />
+          <div className="align">
+            <div className="align-item">
+              <h2>Scottish Escapes - Articles Dashboard</h2>
+            </div>
+          </div>
+          <div className="margin-top-15">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <div className="container">
+                  <Dashboard articles={ this.state.articles } />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

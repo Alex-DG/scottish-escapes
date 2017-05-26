@@ -21,3 +21,21 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
+
+.align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-item {
+  max-width: 50%;
+}
+
+.align-item-top {
+  align-self: flex-start;
+}
+
+.align-item-bottom {
+  align-self: flex-end;
+}
