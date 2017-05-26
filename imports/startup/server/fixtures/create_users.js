@@ -6,17 +6,22 @@ const allUsers = Meteor.users.find().count();
 const users = [
   {
     username: 'alex',
-    password: 'alex'
+    password: 'alex',
+    roles: ['admin'],
   }
 ];
 
 if (allUsers <= 0) {
-  users.map(({ username, password }) => {
-    const userId = Accounts.createUser({ username, password });
+
+  users.map(({ username, password, roles }) => {
+
+    const userId = Accounts.createUser({ username, password, roles });
     if (userId) {
-      console.log('User created');
+      Roles.addUsersToRoles(userId, roles);
     } else {
       console.log('Error creating user');
     }
+
   });
+
 }

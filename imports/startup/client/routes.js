@@ -5,7 +5,7 @@ import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
 
-import { isLogged } from '../../modules/access';
+import { isLogged, accessAdmin } from '../../modules/access';
 
 // Layouts
 import AppLayout from '../../ui/layouts/AppLayout.js';
@@ -18,7 +18,7 @@ import ImagesContainer from '../../ui/container/ImagesContainer';
 import ArticlesContainer from '../../ui/container/ArticlesContainer';
 
 // Components
-
+import NotFound from '../../ui/components/NotFound';
 
 Meteor.startup(() => {
   render(
@@ -29,9 +29,10 @@ Meteor.startup(() => {
 
       <Route name="login" path='/login' title='Login' component={ AppLayout } >
         <IndexRoute name="login" component={ LoginPage } />
-        <Route name="article" path='/articles' component={ ArticlesContainer }/>
+        <Route name="article" path='/articles' component={ ArticlesContainer } onEnter={ accessAdmin }/>
       </Route>
 
+      <Route name="not-found" path="*" component={ NotFound } />
     </Router>,
     document.getElementById('react-root')
   );
