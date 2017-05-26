@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 
 import ArticlesTable from './ArticlesTable';
+import AddArticleModal from '../modals/addarticle/AddArticleModal'
+
+const addArticle = 'Add Article'
+
+const defaultProps = {
+  // Default params
+  isOpen: false,
+  btnText: addArticle,
+  modalTitle: addArticle,
+}
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-    this.state = { articles: [] };
-    this.handleAddArticle = this.handleAddArticle.bind(this);
+  constructor(props) {
+    super(props);
+
+    this.state = { articles: [], isOpen: props.isOpen  };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -15,17 +28,22 @@ class Dashboard extends Component {
     }
   }
 
-  handleAddArticle() {
+  openModal() {
+    this.setState({ isOpen: true });
+  }
 
+  closeModal() {
+    this.setState({ isOpen: false });
   }
 
   render() {
+
     return (
       <div>
         <div className="align">
           <div className="align-item">
-            <button type="button" className="btn btn-success" onClick={ this.handleAddArticle }>
-              Add Article
+            <button type="button" className="btn btn-success" onClick={ this.openModal }>
+              { this.props.btnText }
             </button>
           </div>
         </div>
@@ -33,9 +51,16 @@ class Dashboard extends Component {
         <div>
           <ArticlesTable articles={ this.state.articles } />
         </div>
+
+        <AddArticleModal
+          title={ this.props.modalTitle }
+          closeModal={ this.closeModal }
+          isOpen={ this.state.isOpen } />
       </div>
     );
   }
 }
+
+Dashboard.defaultProps = defaultProps;
 
 export default Dashboard;

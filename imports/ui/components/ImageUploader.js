@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 
 import { Slingshot } from 'meteor/edgee:slingshot';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert'
 
-import UploadModal from './modals/upload/UploadModal';
+//import UploadModal from './modals/upload/UploadModal';
 
-class ImageUploader extends React.Component {
+class ImageUploader extends Component {
 
   constructor() {
     super();
@@ -35,10 +35,10 @@ class ImageUploader extends React.Component {
           className="btn btn-success"
           onClick={ () => this.openModal() }>Upload Image</button>
 
-          <UploadModal
+          {/* <UploadModal
             title={ title }
             isOpen={ this.state.isOpen }
-            closeModal={ this.closeModal.bind(this) } />
+            closeModal={ this.closeModal.bind(this) } /> */}
       </div>
     );
   }

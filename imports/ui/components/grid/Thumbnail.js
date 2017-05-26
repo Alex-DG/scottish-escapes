@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Thumbnail extends React.Component {
+class Thumbnail extends Component {
 
   renderFigure() {
     if (this.props.index === 0) {

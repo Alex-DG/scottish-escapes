@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { Modal } from 'meteor/patrickml:react-modal';
 
@@ -8,7 +9,7 @@ import UploadForm from './UploadForm.js';
  * Upload Image modal
  * @title: Modal's title
  */
-class UploadModal extends React.Component {
+class UploadModal extends Component {
 
   constructor(props) {
     super(props)
@@ -31,8 +32,8 @@ class UploadModal extends React.Component {
 }
 
 UploadModal.propTypes = {
-  isOpen: React.PropTypes.bool.isRequired,
-  closeModal: React.PropTypes.func.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired
 };
 
 export default UploadModal;

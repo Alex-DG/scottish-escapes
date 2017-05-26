@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 
 import Thumbnail from '../grid/Thumbnail';
 
-class EditArticle extends React.Component {
+class EditArticle extends Component {
   constructor() {
     super();
 

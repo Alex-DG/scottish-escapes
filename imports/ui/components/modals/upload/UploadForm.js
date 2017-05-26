@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 
 import { Slingshot } from 'meteor/edgee:slingshot';
@@ -117,7 +118,7 @@ class UploadForm extends React.Component {
 }
 
 UploadForm.propTypes = {
-  closeModal: React.PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired
 };
 
 export default UploadForm;

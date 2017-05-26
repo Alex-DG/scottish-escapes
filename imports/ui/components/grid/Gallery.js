@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Thumbnail from './Thumbnail';
 
-class Gallery extends React.Component {
+class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = { images: [] };
