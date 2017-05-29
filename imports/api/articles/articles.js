@@ -26,7 +26,8 @@ Articles.schema = new SimpleSchema({
 
   description: {
     type: String,
-    label: 'Title',
+    label: 'Description',
+    optional: true
   },
 
   location: {
@@ -37,7 +38,8 @@ Articles.schema = new SimpleSchema({
 
   thumbnail: {
     type: String,
-    label: 'Thumbnail'
+    label: 'Thumbnail',
+    optional: true
   },
 
   images: {
@@ -51,7 +53,7 @@ Articles.schema = new SimpleSchema({
     label: 'Created At'
   },
 
-  uploaded_at: {
+  updated_at: {
     type: Date,
     label: 'Uploaded At'
   }

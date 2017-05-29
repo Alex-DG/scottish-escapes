@@ -16,9 +16,8 @@ export default createContainer( (props) => {
   if (articles) {
     articles.map( (article) => {
       article.updated_at = moment(article.updated_at).format('DD/MM/YYYY');
-      article.date = moment(article.date).format('DD/MM/YYYY');
+      article.created_at = moment(article.created_at).format('DD/MM/YYYY');
     })
   }
-
   return { articles };
 }, ArticlesPage);

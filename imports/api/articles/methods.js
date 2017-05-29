@@ -4,23 +4,23 @@ import Articles from './articles';
 
 Meteor.methods({
 
-  'articles.insert'(title, description, location, thumbnail, images, updated_at) {
+  'articles.insert'(title) {
     check(title, String);
-    check(description, String);
-    check(location, String);
-    check(thumbnail, String);
-    check(images, [Object]);
-    check(updated_at, Date);
 
     return Articles.insert({
       title,
-      description,
-      location,
-      thumbnail,
-      images,
       created_at: new Date(),
-      updated_at
+      updated_at: new Date()
     });
   },
+
+  'articles.remove'(id) {
+    check(id, String);
+
+    const article = Articles.findOne( { _id: id } );
+    if (article) {
+      return Articles.remove(article);
+    }
+  }
 
 });

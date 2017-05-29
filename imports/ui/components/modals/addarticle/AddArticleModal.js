@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Modal from '../../Modal';
+import AddArticleForm from './AddArticleForm';
 
 class AddArticleModal extends Component {
   render() {
@@ -13,7 +14,7 @@ class AddArticleModal extends Component {
         close={ this.props.closeModal }>
 
         <div>
-          AddArticleForm
+          <AddArticleForm closeModal={ this.props.closeModal } />
         </div>
 
       </Modal>

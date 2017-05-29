@@ -43,7 +43,7 @@ const Modal = function Modal({ title, children, close, containerClassName,
     >
       <div className="modal-container">
         <button className="btn -icon close-btn" onClick={close}>
-          <span className="slicon icon-close" />
+          <span className="glyphicon glyphicon-remove" />
         </button>
 
         <div className={modalClassNames}>

@@ -5,7 +5,7 @@ class ArticlesTable extends Component {
   constructor() {
     super();
     this.state = { articles: [], articleToEdit: {} };
-    this.renderEditBtn = this.renderEditBtn.bind(this);
+    this.renderBtns = this.renderBtns.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -14,20 +14,38 @@ class ArticlesTable extends Component {
     }
   }
 
-  renderEditBtn(cell, row, enumObject, rowIndex) {
+  renderBtns(cell, row, enumObject, rowIndex) {
     return (
-      <div onClick={ () => this.handleEdit(rowIndex) }>
-        <span style={ {paddingLeft: '10px'} } className="glyphicon glyphicon-edit"></span>
+      <div className="row align">
+        <div onClick={ () => this.handleEdit(rowIndex) }>
+          <span style={ {paddingLeft: '10px'} } className="glyphicon glyphicon-edit"></span>
+        </div>
+        <div onClick={ () => this.handleDelete(rowIndex) }>
+          <span style={ {paddingLeft: '10px'} } className="glyphicon glyphicon-remove"></span>
+        </div>
       </div>
     );
   }
 
   handleEdit(rowIndex) {
-    if (this.state.articles) {
-      const article = this.state.articles[rowIndex];
-      this.setState({ articleToEdit: article });
-    } else {
-      alert('Error: can\'t find articles..');
+    const article = this.state.articles[rowIndex];
+    if (article) {
+      //TODO: open edit article component
+      console.log(article);
+    }
+  }
+
+  handleDelete(rowIndex) {
+    const article = this.state.articles[rowIndex];
+    if (article) {
+      const id = article._id
+      Meteor.call('articles.remove', id, (error) => {
+        if (error) {
+          Bert.alert(error.reason, 'danger');
+        } else {
+          Bert.alert('Article successfully removed', 'success');
+        }
+      });
     }
   }
 
@@ -38,7 +56,7 @@ class ArticlesTable extends Component {
           <div className="panel-body">
             <div className="col-xs-12 col-sm-12 react-table">
               <BootstrapTable
-                ref="glucometers-table"
+                ref="articles-table"
                 data={ this.state.articles }
                 pagination
                 bordered={ false }
@@ -46,10 +64,10 @@ class ArticlesTable extends Component {
 
                 <TableHeaderColumn width='25' />
                 <TableHeaderColumn isKey dataField='_id' hidden>ID</TableHeaderColumn>
-                <TableHeaderColumn width='150' dataField='created_at' dataSort={ true }>Creation</TableHeaderColumn>
-                <TableHeaderColumn width='150' dataField='title' dataSort={ true }>Title</TableHeaderColumn>
-                <TableHeaderColumn width='150' dataField='updated_at' dataSort={ true }>Updated At</TableHeaderColumn>
-                <TableHeaderColumn width='150' dataField='' dataFormat={ this.handleEdit }>Edit</TableHeaderColumn>
+                <TableHeaderColumn width='100' dataField='created_at' dataSort={ true } dataAlign="center">Creation</TableHeaderColumn>
+                <TableHeaderColumn width='100' dataField='updated_at' dataSort={ true } dataAlign="center">Updated At</TableHeaderColumn>
+                <TableHeaderColumn width='200' dataField='title' dataSort={ true } dataAlign="center">Title</TableHeaderColumn>
+                <TableHeaderColumn width='100' dataField='' dataFormat={ this.renderBtns } dataAlign="center"></TableHeaderColumn>
                 <TableHeaderColumn width='25' />
               </BootstrapTable>
             </div>
