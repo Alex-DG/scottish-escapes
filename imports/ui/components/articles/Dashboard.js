@@ -6,7 +6,6 @@ import AddArticleModal from '../modals/addarticle/AddArticleModal'
 const addArticle = 'Add Article'
 
 const defaultProps = {
-  // Default params
   isOpen: false,
   btnText: addArticle,
   modalTitle: addArticle,

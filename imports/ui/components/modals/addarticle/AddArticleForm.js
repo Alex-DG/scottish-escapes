@@ -23,7 +23,6 @@ class AddArticleForm extends Component {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
-        Bert.alert('Article successfully added', 'success');
         this.props.closeModal();
       }
     });
