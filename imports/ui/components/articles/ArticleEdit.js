@@ -4,17 +4,20 @@ import Dropzone from 'react-dropzone';
 
 import Thumbnail from '../grid/Thumbnail';
 
-class EditArticle extends Component {
-  constructor() {
-    super();
+class ArticleEdit extends Component {
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      preview: '',
-      images: [],
-    }
+    this.state = { article: {} };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleThumbnail = this.handleThumbnail.bind(this);
     this.handleDropImages = this.handleDropImages.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.article) {
+      this.setState({ article: nextProps.article });
+    }
   }
 
   handleSubmit(event) {
@@ -35,11 +38,12 @@ class EditArticle extends Component {
     if (file) {
       let reader = new FileReader();
       let url = reader.readAsDataURL(file);
+
       reader.onloadend = function (e) {
-        this.setState({
-            preview: reader.result,
-        })
-      }.bind(this);
+              this.setState({
+                  preview: reader.result,
+              })
+            }.bind(this);
     }
   }
 
@@ -53,15 +57,15 @@ class EditArticle extends Component {
         <form className="form-horizontal" onSubmit={ this.handleSubmit }>
 
           <div className="form-group">
-            <input type="text" className="form-control" name="title" ref="title" placeholder="Enter title" />
+            <input type="text" className="form-control" name="title" ref="title" placeholder="Enter title" defaultValue={ this.state.article.title } />
           </div>
 
           <div className="form-group">
-            <input type="text" className="form-control" name="location" ref="location" placeholder="Enter location" />
+            <input type="text" className="form-control" name="location" ref="location" placeholder="Enter location" defaultValue={ this.state.article.location } />
           </div>
 
           <div className="form-group">
-            <textarea type="text" rows="6" className="form-control" name="description" ref="description" placeholder="Enter description" />
+            <textarea type="text" rows="6" className="form-control" name="description" ref="description" placeholder="Enter description" defaultValue={ this.state.article.description } />
           </div>
 
           <div className="form-group row">
@@ -95,4 +99,4 @@ class EditArticle extends Component {
   }
 }
 
-export default EditArticle;
+export default ArticleEdit;

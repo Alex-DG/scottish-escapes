@@ -14,7 +14,6 @@ class ArticlesTable extends Component {
     super(props);
     this.state = { articles: [], isOpen: props.isOpen, rowIndex: undefined };
     this.renderBtns = this.renderBtns.bind(this);
-    //this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleRemoveStatus = this.handleRemoveStatus.bind(this);
   }
@@ -27,10 +26,12 @@ class ArticlesTable extends Component {
     this.setState({ isOpen: false });
   }
 
+  componentWillMount() {
+    this.setState({ articles: this.props.articles });
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.articles) {
-      this.setState({ articles: nextProps.articles });
-    }
+    this.setState({ articles: nextProps.articles });
   }
 
   renderBtns(cell, row, enumObject, rowIndex) {
@@ -48,7 +49,6 @@ class ArticlesTable extends Component {
 
   handleRemoveStatus(status) {
     if (status === 'YES') {
-      console.log('delete');
       const article = this.state.articles[this.state.rowIndex];
       if (article) {
         const id = article._id
@@ -64,10 +64,10 @@ class ArticlesTable extends Component {
   }
 
   handleEdit(rowIndex) {
+
     const article = this.state.articles[rowIndex];
     if (article) {
-      //TODO: open edit article component
-      console.log(article);
+      this.props.edit(article._id);
     }
   }
 

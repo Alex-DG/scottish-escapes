@@ -7,7 +7,6 @@ import { Bert } from 'meteor/themeteorchef:bert';
 
 import Dashboard from '../components/articles/Dashboard';
 
-
 class ArticlesPage extends Component {
   constructor() {
     super();
@@ -33,7 +32,7 @@ class ArticlesPage extends Component {
       <div>
         <div className="row">
           <button type="button" className="btn btn-danger pull-right margin-top-10 margin-right-10" onClick={ this.handleLogout }>
-            <span className="glyphicon glyphicon-log-out"></span>Logout
+            <span className="glyphicon glyphicon-log-out"/><span>Logout</span>
           </button>
         </div>
 

@@ -14,15 +14,17 @@ class AddArticleForm extends Component {
     const name = event.target.name;
     const value = event.target.value;
     const newState = { [name]: value };
+
     this.setState(newState);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    Meteor.call('articles.insert', this.state.title, (error) => {
+    Meteor.call('articles.insert', this.state.title, (error, result) => {
       if (error) {
         Bert.alert(error.reason, 'danger');
       } else {
+        this.props.add(result)
         this.props.closeModal();
       }
     });
