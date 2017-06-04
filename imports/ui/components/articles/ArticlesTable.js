@@ -6,21 +6,21 @@ import RemoveArticleModal from '../modals/removearticle/RemoveArticleModal';
 const propTypes = {
   articles: PropTypes.array,
   isOpen: PropTypes.bool,
-  row: PropTypes.number,
+  articleToRemove: PropTypes.object,
   modalTitle: PropTypes.string,
 };
 
 const defaultProps = {
   articles: [],
   isOpen: false,
-  row: undefined,
+  articleToRemove: undefined,
   modalTitle: 'Remove Article',
 }
 
 class ArticlesTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { articles: props.article, isOpen: props.isOpen, row: props.row };
+    this.state = { articles: props.article, isOpen: props.isOpen, articleToRemove: props.articleToRemove };
 
     this.renderBtns = this.renderBtns.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -29,7 +29,7 @@ class ArticlesTable extends Component {
   }
 
   openModal(row) {
-    this.setState({ isOpen: true, row: row});
+    this.setState({ isOpen: true, articleToRemove: row});
   }
 
   closeModal() {
@@ -44,7 +44,7 @@ class ArticlesTable extends Component {
     this.setState({ articles: nextProps.articles });
   }
 
-  renderBtns(cell, row, enumObject, row) {
+  renderBtns(cell, row, enumObject) {
     return (
       <div className="row align">
         <div onClick={ () => this.handleEdit(row) }>
@@ -59,9 +59,9 @@ class ArticlesTable extends Component {
 
   handleRemoveStatus(status) {
     if (status === 'YES') {
-      const article = this.state.articles[this.state.row];
-      if (article) {
-        const id = article._id
+      const articles = this.state.articles.filter( a => a._id === this.state.articleToRemove._id );
+      if (articles[0]) {
+        const id = articles[0]._id
         Meteor.call('articles.remove', id, (error) => {
           if (error) {
             Bert.alert(error.reason, 'danger');
@@ -73,11 +73,8 @@ class ArticlesTable extends Component {
     }
   }
 
-  handleEdit(row) {
-    const article = this.state.articles[row];
-    if (article) {
-      this.props.edit(article);
-    }
+  handleEdit(article) {
+    this.props.edit(article);
   }
 
   handleAddArticle() {

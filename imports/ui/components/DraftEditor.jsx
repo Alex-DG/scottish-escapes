@@ -5,7 +5,6 @@ class DraftEditor extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       value: RichTextEditor.createEmptyValue()
     };
