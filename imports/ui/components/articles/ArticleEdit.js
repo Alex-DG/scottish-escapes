@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import update from 'react-addons-update';
 import Dropzone from 'react-dropzone';
 
+import DraftEditor from '../DraftEditor';
 import Thumbnail from '../grid/Thumbnail';
+
+const propTypes = {
+  article: PropTypes.object,
+};
+
+const defaultProps = {
+ article: {
+   title: '',
+   location: '',
+   description: '',
+   thumbnail: '',
+   images: [],
+ },
+};
 
 class ArticleEdit extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { article: {} };
+    this.state = {
+      article: props.article,
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleThumbnail = this.handleThumbnail.bind(this);
     this.handleDropImages = this.handleDropImages.bind(this);
@@ -20,16 +40,18 @@ class ArticleEdit extends Component {
     }
   }
 
+  handleInputChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    const articleUpdated = update(this.state.article, {
+      [name] : { $set: value }
+    });
+    this.setState({ article: articleUpdated });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-
-    const title = this.refs.title.value;
-    const location = this.refs.location.value;
-    const description = this.refs.description.value;
-
-    console.log(title);
-    console.log(location);
-    console.log(description);
+    this.props.saveArticle();
   }
 
   handleThumbnail() {
@@ -53,50 +75,76 @@ class ArticleEdit extends Component {
 
   render() {
     return(
-      <div className="container">
-        <form className="form-horizontal" onSubmit={ this.handleSubmit }>
+      <div className="margin-top-15">
+        <div className="container">
+          <form className="form-horizontal" onSubmit={ this.handleSubmit }>
 
-          <div className="form-group">
-            <input type="text" className="form-control" name="title" ref="title" placeholder="Enter title" defaultValue={ this.state.article.title } />
-          </div>
-
-          <div className="form-group">
-            <input type="text" className="form-control" name="location" ref="location" placeholder="Enter location" defaultValue={ this.state.article.location } />
-          </div>
-
-          <div className="form-group">
-            <textarea type="text" rows="6" className="form-control" name="description" ref="description" placeholder="Enter description" defaultValue={ this.state.article.description } />
-          </div>
-
-          <div className="form-group row">
-            <div className="col-xs-12 col-sm-3">
-              <label htmlFor="thumbnailfile">Select Thumbnail</label>
+            <div className="form-group">
               <input
-                type='file' accept='.jpg'
-                name="thumbnail"
-                onChange={ this.handleThumbnail }
-                ref={ (ref) => this.fileUpload = ref } />
-              <small id="fileHelp" className="form-text text-muted">Format: .jpg</small>
+                type="text"
+                className="form-control"
+                name="title"
+                placeholder="Enter title"
+                onChange={ this.handleInputChange }
+                defaultValue={ this.state.article.title } />
             </div>
 
-            <div className="col-xs-12 col-sm-4">
-              <Thumbnail index={ 0 } url={ this.state.preview } />
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                name="location"
+                placeholder="Enter location"
+                onChange={ this.handleInputChange }
+                defaultValue={ this.state.article.location } />
             </div>
-          </div>
 
-          <div className="form-group row">
-            <Dropzone onDrop={ this.handleDropImages }>
-              <div className="full-height flex-center-vertical-container">
-                <span>[ Drop your images here, or click to select one ]</span>
+            <div className="form-group">
+              <DraftEditor onChange={ this.handleInputChange } />
+              {/* <textarea
+                type="text"
+                rows="6"
+                className="form-control"
+                name="description"
+                placeholder="Enter description"
+                onChange={ this.handleInputChange }
+                defaultValue={ this.state.article.description } /> */}
+            </div>
+
+            {/* <div className="form-group row">
+              <div className="col-xs-12 col-sm-3">
+                <label htmlFor="thumbnailfile">Select Thumbnail</label>
+                <input
+                  type='file' accept='.jpg'
+                  name="thumbnail"
+                  onChange={ this.handleThumbnail }
+                  ref={ (ref) => this.fileUpload = ref } />
+                <small id="fileHelp" className="form-text text-muted">Format: .jpg</small>
               </div>
-            </Dropzone>
-          </div>
 
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+              <div className="col-xs-12 col-sm-4">
+                <Thumbnail index={ 0 } url={ this.state.preview } />
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <Dropzone onDrop={ this.handleDropImages }>
+                <div className="full-height flex-center-vertical-container">
+                  <span>[ Drop your images here, or click to select one ]</span>
+                </div>
+              </Dropzone>
+            </div> */}
+
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     );
   }
 }
+
+
+ArticleEdit.propTypes = propTypes;
+ArticleEdit.defaultProps = defaultProps;
 
 export default ArticleEdit;

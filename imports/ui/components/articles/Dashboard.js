@@ -6,8 +6,7 @@ import AddArticleModal from '../modals/addarticle/AddArticleModal'
 
 const defaultProps = {
   isOpen: false,
-  articleToEdit: undefined,
-  modalTitle: 'Add Article',
+  article: undefined
 }
 
 class Dashboard extends Component {
@@ -16,13 +15,9 @@ class Dashboard extends Component {
 
     this.state = {
       articles: [],
-      newArticleId: undefined,
-      articleToEdit: undefined,
-      isEdit: false,
-      isOpen: props.isOpen  };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+      article: undefined,
+      isArticleEdit: false
+    };
 
     this.handleSaveArticle = this.handleSaveArticle.bind(this);
     this.handleEdition = this.handleEdition.bind(this);
@@ -32,58 +27,31 @@ class Dashboard extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.articles) {
-
-      let isEdit = false;
-      let articleToEdit = undefined;
-
-      if (this.state.newArticleId) {
-        const articles = nextProps.articles.filter( a => a._id === this.state.newArticleId);
-        if (articles && articles[0]) {
-          isEdit = true;
-          articleToEdit = articles[0];
-        }
-      }
-
-      this.setState({ articles: nextProps.articles, isEdit: isEdit, articleToEdit: articleToEdit });
+      this.setState({ articles: nextProps.articles });
     }
-  }
-
-  openModal() {
-    this.setState({ isOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ isOpen: false });
-  }
-
-  getArticleById(id) {
-    const articles = nextProps.articles.filter( a => a._id === id);
-    if (articles && articles[0]) {
-      return articles[0];
-    }
-    return undefined
   }
 
   handleSaveArticle() {
-    this.setState({ articleToEdit: undefined });
+    this.setState({ article: undefined });
   }
 
-  handleInsertion(newArticleId) {
-    this.setState({ newArticleId: newArticleId });
+  handleInsertion() {
+    this.setState({  isArticleEdit: true, article: undefined });
   }
 
   handleEdition(article) {
-    this.setState({ isEdit: true, articleToEdit: article });
+    console.log(article);
+    this.setState({ isArticleEdit: true, article: article });
   }
 
   handleBack() {
-    this.setState({ newArticleId: undefined, isEdit: false, articleToEdit: undefined });
+    this.setState({  isArticleEdit: false, article: undefined });
   }
 
   render() {
     return (
       <div>
-        { this.state.isEdit ?
+        { this.state.isArticleEdit ?
 
           <div>
             <div onClick={ this.handleBack }>
@@ -99,7 +67,7 @@ class Dashboard extends Component {
             </div>
 
             <div>
-              <ArticleEdit article={ this.state.articleToEdit } />
+              <ArticleEdit article={ this.state.article } />
             </div>
           </div>
 
@@ -108,7 +76,7 @@ class Dashboard extends Component {
           <div>
             <div className="align">
               <div className="align-item">
-                <button type="button" className="btn btn-success" onClick={ this.openModal }>
+                <button type="button" className="btn btn-success" onClick={ this.handleInsertion }>
                   Add Article
                 </button>
               </div>
@@ -119,12 +87,6 @@ class Dashboard extends Component {
             </div>
           </div>
         }
-
-        <AddArticleModal
-          title={ this.props.modalTitle }
-          add={ this.handleInsertion }
-          closeModal={ this.closeModal }
-          isOpen={ this.state.isOpen } />
       </div>
     );
   }

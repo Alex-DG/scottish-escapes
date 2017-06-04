@@ -67,7 +67,7 @@ class ArticlesTable extends Component {
 
     const article = this.state.articles[rowIndex];
     if (article) {
-      this.props.edit(article._id);
+      this.props.edit(article);
     }
   }
 
