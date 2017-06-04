@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ArticlesTable from './ArticlesTable';
 import ArticleEdit from './ArticleEdit';
 import AddArticleModal from '../modals/addarticle/AddArticleModal'
 
+const propTypes = {
+  articles: PropTypes.array,
+  article: PropTypes.object,
+  isArticleEdit: PropTypes.bool,
+};
+
 const defaultProps = {
-  isOpen: false,
-  article: undefined
+  articles: [],
+  article: undefined,
+  isArticleEdit: false,
 }
 
 class Dashboard extends Component {
@@ -14,14 +21,14 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      articles: [],
-      article: undefined,
-      isArticleEdit: false
+      articles: props.articles,
+      article: props.article,
+      isArticleEdit: props.isArticleEdit
     };
 
-    this.handleSaveArticle = this.handleSaveArticle.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.handleEdition = this.handleEdition.bind(this);
-    this.handleInsertion = this.handleInsertion.bind(this);
+    this.handleAddNew = this.handleAddNew.bind(this);
     this.handleBack = this.handleBack.bind(this);
   }
 
@@ -31,21 +38,20 @@ class Dashboard extends Component {
     }
   }
 
-  handleSaveArticle() {
-    this.setState({ article: undefined });
+  handleBack() { // Handle back navigation between components
+    this.setState({ isArticleEdit: false, article: undefined });
   }
 
-  handleInsertion() {
-    this.setState({  isArticleEdit: true, article: undefined });
+  handleSave() {
+    this.setState({ isArticleEdit: false, article: undefined });
+  }
+
+  handleAddNew() { // Just handle navigation between components
+    this.setState({ isArticleEdit: false, article: undefined });
   }
 
   handleEdition(article) {
-    console.log(article);
     this.setState({ isArticleEdit: true, article: article });
-  }
-
-  handleBack() {
-    this.setState({  isArticleEdit: false, article: undefined });
   }
 
   render() {
@@ -58,32 +64,17 @@ class Dashboard extends Component {
               <span className="glyphicon glyphicon-chevron-left"></span>
               <span>Back</span>
             </div>
-            <div className="align">
-              <div className="align-item">
-                <button type="button" className="btn btn-success" onClick={ this.handleSaveArticle }>
-                  Save Article
-                </button>
-              </div>
-            </div>
 
             <div>
-              <ArticleEdit article={ this.state.article } />
+              <ArticleEdit save={ this.handleSave } article={ this.state.article } />
             </div>
           </div>
 
           :
 
           <div>
-            <div className="align">
-              <div className="align-item">
-                <button type="button" className="btn btn-success" onClick={ this.handleInsertion }>
-                  Add Article
-                </button>
-              </div>
-            </div>
-
             <div>
-              <ArticlesTable edit={ this.handleEdition } articles={ this.state.articles } />
+              <ArticlesTable save={ this.handleSave } edit={ this.handleEdition } add={ this.handleAddNew } articles={ this.state.articles } />
             </div>
           </div>
         }
@@ -92,6 +83,7 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = propTypes;
 Dashboard.defaultProps = defaultProps;
 
 export default Dashboard;

@@ -86,3 +86,11 @@
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
+
+.resize-container {
+    border: 1px solid grey;
+    padding: 10px;
+    width: 100%;
+    resize: vertical;
+    overflow: auto;
+}
