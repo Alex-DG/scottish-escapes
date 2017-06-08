@@ -91,6 +91,16 @@
     border: 1px solid grey;
     padding: 10px;
     width: 100%;
+    border-radius: 4px;
     resize: vertical;
     overflow: auto;
+}
+
+.thumbnail {
+  height: 70px;
+  &span {
+    font-weight: lighter;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
 }

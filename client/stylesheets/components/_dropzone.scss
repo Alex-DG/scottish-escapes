@@ -1,0 +1,14 @@
+.dropzone-container {
+  width: 100%;
+  border: 1px solid grey;
+  border-style: dashed;
+  background: #f2f2f2;
+  border-radius: 4px;
+  
+  & div > span {
+    color: #999999;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+}
