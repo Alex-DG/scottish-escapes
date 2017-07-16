@@ -1,0 +1,10 @@
+.progress-bar-container {
+  > .progress-bar {
+    background-color: $STEEL;
+    transition: width 0.1s;
+  }
+
+  &.progress-completed > .progress-bar {
+    background-color: $ACTIVE_GREEN;
+  }
+}

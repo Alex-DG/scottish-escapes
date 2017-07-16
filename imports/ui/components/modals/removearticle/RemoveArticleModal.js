@@ -15,7 +15,7 @@ class RemoveArticleModal extends Component {
 
         <div>
           <RemoveArticleForm
-            handleRemoveStatus={ this.props.handleRemoveStatus }
+            handleRemove={ this.props.handleRemove }
             closeModal={ this.props.closeModal } />
         </div>
 
@@ -27,7 +27,8 @@ class RemoveArticleModal extends Component {
 RemoveArticleModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  handleRemoveStatus: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default RemoveArticleModal;

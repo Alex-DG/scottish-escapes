@@ -9,7 +9,7 @@ class AddArticleForm extends Component {
   }
 
   handleOnClick(event) {
-    this.props.handleRemoveStatus(event.target.value)
+    this.props.handleRemove(event.target.value)
     this.props.closeModal();
   }
 

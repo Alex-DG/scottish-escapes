@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ImageUploader from '../components/ImageUploader';
 import Gallery from '../components/grid/Gallery';
 
 class HomePage extends Component {
@@ -20,7 +19,6 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        <ImageUploader />
         <div className="flex-container">
           <Gallery className="flex-container" data={ this.state.images }/>
         </div>

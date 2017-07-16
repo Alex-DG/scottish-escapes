@@ -14,7 +14,10 @@ class AddArticleModal extends Component {
         close={ this.props.closeModal }>
 
         <div>
-          <AddArticleForm add={ this.props.add } closeModal={ this.props.closeModal } />
+          <AddArticleForm
+            handleAdd={ this.props.handleAdd }
+            closeModal={ this.props.closeModal }
+          />
         </div>
 
       </Modal>
@@ -23,9 +26,10 @@ class AddArticleModal extends Component {
 }
 
 AddArticleModal.propTypes = {
+  title: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired,
+  handleAdd: PropTypes.func.isRequired,
 };
 
 export default AddArticleModal;

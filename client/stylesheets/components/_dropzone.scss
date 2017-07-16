@@ -1,14 +1,27 @@
 .dropzone-container {
-  width: 100%;
-  border: 1px solid grey;
-  border-style: dashed;
-  background: #f2f2f2;
-  border-radius: 4px;
-  
-  & div > span {
-    color: #999999;
-    font-weight: bold;
-    margin-top: 25px;
-    margin-bottom: 25px;
+  border: 1px dashed $STEEL;
+  border-radius: $STEEL;
+  transition: border-color 0.3s;
+
+  &.dropzone-active {
+    border-color: $ACTIVE_GREEN;
+
+    > .form-label {
+      color: $ACTIVE_GREEN;
+    }
+  }
+
+  &.dropzone-rejected {
+    border-color: $ERROR_RED;
+
+    > .form-label {
+      color: $ERROR_RED;
+    }
+  }
+
+  > .form-label {
+    display: block;
+    margin: 10% 0;
+    transition: color 0.3s;
   }
 }

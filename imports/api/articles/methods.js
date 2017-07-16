@@ -14,6 +14,23 @@ Meteor.methods({
     });
   },
 
+  'articles.save'(_id, title, description, location, thumbnail, images) {
+    check(title, String);
+    check(title, String);
+    check(title, String);
+
+    return Articles.update(_id, {
+      $set: {
+        title,
+        description,
+        location,
+        thumbnail,
+        images,
+        updated_at: new Date(),
+      }
+    });
+  },
+
   'articles.remove'(id) {
     check(id, String);
 

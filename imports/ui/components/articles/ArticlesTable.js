@@ -23,9 +23,9 @@ class ArticlesTable extends Component {
     this.state = { articles: props.article, isOpen: props.isOpen, articleToRemove: props.articleToRemove };
 
     this.renderBtns = this.renderBtns.bind(this);
+
     this.closeModal = this.closeModal.bind(this);
-    this.handleRemoveStatus = this.handleRemoveStatus.bind(this);
-    this.handleAddArticle = this.handleAddArticle.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   openModal(row) {
@@ -39,7 +39,7 @@ class ArticlesTable extends Component {
   componentWillMount() {
     this.setState({ articles: this.props.articles });
   }
-
+  
   componentWillReceiveProps(nextProps) {
     this.setState({ articles: nextProps.articles });
   }
@@ -47,7 +47,7 @@ class ArticlesTable extends Component {
   renderBtns(cell, row, enumObject) {
     return (
       <div className="row align">
-        <div onClick={ () => this.handleEdit(row) }>
+        <div onClick={ () => this.props.handleEdit(row) }>
           <span style={ {paddingLeft: '10px'} } className="glyphicon glyphicon-edit"></span>
         </div>
         <div onClick={ () => this.openModal(row) }>
@@ -57,7 +57,7 @@ class ArticlesTable extends Component {
     );
   }
 
-  handleRemoveStatus(status) {
+  handleRemove(status) {
     if (status === 'YES') {
       const articles = this.state.articles.filter( a => a._id === this.state.articleToRemove._id );
       if (articles[0]) {
@@ -73,24 +73,9 @@ class ArticlesTable extends Component {
     }
   }
 
-  handleEdit(article) {
-    this.props.edit(article);
-  }
-
-  handleAddArticle() {
-    this.props.add();
-  }
-
   render() {
     return (
       <div>
-        <div className="align margin-top-20">
-          <div className="align-item">
-            <button type="button" className="btn btn-success" onClick={ this.handleAddArticle }>
-              Add Article
-            </button>
-          </div>
-        </div>
 
         <div className="margin-top-15">
           <div className="panel panel-default">
@@ -118,7 +103,7 @@ class ArticlesTable extends Component {
           <RemoveArticleModal
             title={ this.props.modalTitle }
             closeModal={ this.closeModal }
-            handleRemoveStatus={ this.handleRemoveStatus }
+            handleRemove={ this.handleRemove }
             isOpen={ this.state.isOpen } />
         </div>
       </div>

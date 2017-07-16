@@ -3,10 +3,11 @@ import update from 'react-addons-update';
 import Dropzone from 'react-dropzone';
 
 import DraftEditor from '../DraftEditor';
-import Thumbnail from '../grid/Thumbnail';
+import PhotoUploader from '../PhotoUploader';
 
 const propTypes = {
-  article: PropTypes.object,
+  article: PropTypes.object.isRequired,
+  preview: PropTypes.string,
 };
 
 const defaultProps = {
@@ -25,12 +26,12 @@ class ArticleEdit extends Component {
     super(props);
 
     this.state = {
-      article: props.article,
+      article: props.article, preview: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSaveArticle = this.handleSaveArticle.bind(this);
-    this.handleDropImages = this.handleDropImages.bind(this);
+    this.handleArticleSave = this.handleArticleSave.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,8 +40,8 @@ class ArticleEdit extends Component {
     }
   }
 
-  handleSaveArticle() {
-    this.props.save(this.props.article);
+  handleArticleSave() {
+    this.props.handleSave(this.props.article);
   }
 
   handleInputChange(event) {
@@ -54,30 +55,22 @@ class ArticleEdit extends Component {
     this.setState({ article: articleUpdated });
   }
 
-  handleDropImage(files) {
-    console.log(files);
-    const file = files[0];
-    if (file) {
-      this.setState({ preview: file.preview });
-      // let reader = new FileReader();
-      // let url = reader.readAsDataURL(file);
-      // reader.onloadend = function (e) {
-      //   this.setState({ preview: reader.result });
-      // }.bind(this);
-    }
-  }
-
-  handleDropImages(files) {
-    console.log(files);
+  handlePreview(preview) {
+    this.setState({ preview: preview });
   }
 
   render() {
-    console.log(this.state.preview);
     return(
       <div>
+        
+        <div onClick={ this.props.handleBack }>
+          <span className="glyphicon glyphicon-chevron-left"></span>
+          <span>Back</span>
+        </div>
+
         <div className="align">
           <div className="align-item">
-            <button type="button" className="btn btn-success" onClick={ this.handleSaveArticle }>
+            <button type="button" className="btn btn-success" onClick={ this.handleArticleSave }>
               Save Article
             </button>
           </div>
@@ -89,6 +82,7 @@ class ArticleEdit extends Component {
               <form className="form-horizontal">
 
                 <div className="form-group">
+                  <label>Title</label>
                   <input
                     type="text"
                     className="form-control"
@@ -99,6 +93,7 @@ class ArticleEdit extends Component {
                 </div>
 
                 <div className="form-group">
+                  <label>Location</label>
                   <input
                     type="text"
                     className="form-control"
@@ -109,6 +104,7 @@ class ArticleEdit extends Component {
                 </div>
 
                 <div className="form-group">
+                  <label>Description</label>
                   <div className="resize-container">
                     <DraftEditor
                       name="description"
@@ -128,20 +124,17 @@ class ArticleEdit extends Component {
               <form className="form-horizontal">
 
                 <div className="form-group">
-                  <div className="col-xs-6 col-md-6">
-                    <Dropzone
-                      className="dropzone-container"
-                      onDrop={ this.handleDropImage }>
-                      <div className="align">
-                        <span>[ Thumbnail: Drop or Select your file ]</span>
-                      </div>
-                    </Dropzone>
-                  </div>
-                  <div className="col-xs-6 col-md-6">
-                    <div className="thumbnail">
-                      <div>
-                         <img src={ this.state.preview } />
-                      </div>
+                  <label>Thumbnail</label>
+                  <div>
+                    <div className="col-xs-12 col-sm-6">
+                      <PhotoUploader
+                        contextName={ 'thumbnail' }
+                        handleUpload={ this.handleInputChange }
+                        handlePreview={ this.handlePreview }
+                      />
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                      <img src={ this.state.preview } />
                     </div>
                   </div>
                 </div>
@@ -154,7 +147,6 @@ class ArticleEdit extends Component {
     );
   }
 }
-
 
 ArticleEdit.propTypes = propTypes;
 ArticleEdit.defaultProps = defaultProps;
